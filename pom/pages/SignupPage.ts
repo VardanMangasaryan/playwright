@@ -28,7 +28,7 @@ export class SignupPage {
     SINGAPORE: "Singapore",
   };
 
-  readonly pageUrl = "https://www.automationexercise.com/signup";
+  readonly pageUrl = "/signup";
 
   constructor(page: Page) {
     this.page = page;

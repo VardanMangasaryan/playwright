@@ -9,10 +9,7 @@ export class LoginPage extends BasePage {
   readonly signupName: Locator;
   readonly signupButton: Locator;
 
-  constructor(
-    page: Page,
-    pageUrl = "https://www.automationexercise.com/signup",
-  ) {
+  constructor(page: Page, pageUrl = "/login") {
     super(page, pageUrl);
     this.loginEmail = page.getByTestId("login-email");
     this.loginPassword = page.getByTestId("login-password");

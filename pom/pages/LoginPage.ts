@@ -8,7 +8,7 @@ export class LoginPage {
   readonly signupEmail: Locator;
   readonly signupName: Locator;
   readonly signupButton: Locator;
-  readonly pageUrl = "https://www.automationexercise.com/signup";
+  readonly pageUrl = "/login";
 
   constructor(page: Page) {
     this.page = page;

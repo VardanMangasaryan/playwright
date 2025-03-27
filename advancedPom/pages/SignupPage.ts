@@ -28,10 +28,7 @@ export class SignupPage extends BasePage {
     SINGAPORE: "Singapore",
   };
 
-  constructor(
-    page: Page,
-    pageUrl = "https://www.automationexercise.com/signup",
-  ) {
+  constructor(page: Page, pageUrl = "/signup") {
     super(page, pageUrl);
     this.email = page.getByTestId("email");
     this.name = page.getByTestId("name");
