@@ -15,7 +15,7 @@ export default defineConfig({
   testDir: "./advancedPom/tests",
   /* Run tests in files in parallel */
   fullyParallel: false,
-  timeout: 1000000000,
+  timeout: 300000,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -46,7 +46,7 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
-      testDir: "./api/tests",
+      testDir: "./api/apiPom/tests",
     },
 
     // {
