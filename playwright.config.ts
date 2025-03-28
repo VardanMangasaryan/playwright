@@ -12,7 +12,7 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./api",
+  testDir: "./advancedPom/tests",
   /* Run tests in files in parallel */
   fullyParallel: false,
   timeout: 1000000000,
@@ -26,7 +26,7 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: "http://automationpractice.com",
+    baseURL: "https://www.automationexercise.com/",
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
     testIdAttribute: "data-qa",
