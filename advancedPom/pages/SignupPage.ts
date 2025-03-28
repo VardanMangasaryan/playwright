@@ -17,6 +17,7 @@ export class SignupPage extends BasePage {
   readonly mobileNumberInput: Locator;
   readonly createAccountButton: Locator;
   readonly accountCreatedMessageSection: Locator;
+  readonly continueButton: Locator;
 
   readonly COUNTRIES = {
     INDIA: "India",
@@ -45,6 +46,7 @@ export class SignupPage extends BasePage {
     this.mobileNumberInput = page.getByTestId("mobile_number");
     this.createAccountButton = page.getByTestId("create-account");
     this.accountCreatedMessageSection = page.getByTestId("account-created");
+    this.continueButton = page.getByTestId("continue-button");
   }
   async goToPage() {
     await this.page.goto(this.pageUrl);
@@ -88,5 +90,8 @@ export class SignupPage extends BasePage {
   }
   async clickCreateAccountButton() {
     await this.createAccountButton.click();
+  }
+  async clickContinueButton() {
+    await this.continueButton.click();
   }
 }

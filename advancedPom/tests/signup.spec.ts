@@ -1,17 +1,16 @@
 import { expect } from "@playwright/test";
 import { test } from "./baseTest";
 
-const email = "duhewdfsfmmy@dum.dumm";
-const name = "dummeyxName";
+const email = process.env.EMAIL;
+const name = process.env.NAME;
 
 test("Sign Up with valid data", async ({
   loginPage,
   signupPage,
-  consoleLog,
+  headerPage,
 }) => {
   await loginPage.goToPage();
   await loginPage.signupWithGivenEmailAndPassword(email, name);
-  await consoleLog("Kalbas");
   await expect(signupPage.name).toHaveValue(name);
   await expect(signupPage.email).toHaveValue(email);
 
@@ -30,4 +29,7 @@ test("Sign Up with valid data", async ({
   await expect(signupPage.accountCreatedMessageSection).toHaveText(
     "Account Created!",
   );
+  await signupPage.clickContinueButton();
+  await headerPage.clickOnDeleteAccount();
+  await expect(signupPage.continueButton).toBeVisible();
 });
