@@ -12,10 +12,10 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./api",
+  testDir: "./advancedPom/tests",
   /* Run tests in files in parallel */
   fullyParallel: false,
-  timeout: 1000000000,
+  timeout: 300000,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -26,14 +26,14 @@ export default defineConfig({
   reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    baseURL: "http://automationpractice.com",
+    baseURL: "https://www.automationexercise.com/",
     /* Base URL to use in actions like `await page.goto('/')`. */
     // baseURL: 'http://127.0.0.1:3000',
     testIdAttribute: "data-qa",
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
     launchOptions: {
-      headless: false,
+      headless: true,
     },
   },
   /* Configure projects for major browsers */
@@ -41,6 +41,12 @@ export default defineConfig({
     {
       name: "chromium",
       use: { ...devices["Desktop Chrome"] },
+      testDir: "./advancedPom/tests",
+    },
+    {
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+      testDir: "./api/apiPom/tests",
     },
 
     // {
