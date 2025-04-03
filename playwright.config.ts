@@ -1,4 +1,4 @@
-import { defineConfig, devices } from "@playwright/test";
+import { defineConfig } from "@playwright/test";
 
 /**
  * Read environment variables from file.
@@ -12,10 +12,12 @@ import { defineConfig, devices } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./advancedPom/tests",
+  // globalSetup: "./global-setup.ts",
+  // globalTeardown: "./global-teardown.ts",
+  testDir: "./advancedPom/test",
   /* Run tests in files in parallel */
   fullyParallel: false,
-  timeout: 300000,
+  timeout: 30000,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -33,22 +35,36 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
     launchOptions: {
-      headless: true,
+      headless: false,
     },
   },
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-      testDir: "./advancedPom/tests",
+      name: "setup",
+      testMatch: /global\.setup\.ts/,
+      testDir: "./api",
+      teardown: "clean up",
     },
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
+      name: "apiTests",
       testDir: "./api/apiPom/tests",
+      dependencies: ["setup"],
     },
-
+    {
+      name: "apiTestsWithoutPom",
+      testDir: "./api/tests",
+    },
+    {
+      name: "clean up",
+      testMatch: /global\.teardown\.ts/,
+      testDir: "./api/apiPom/global",
+      // dependencies: ["apiTests"],
+    },
+    {
+      name: "just up",
+      testDir: "./advancedPom/tests",
+    },
     // {
     //   name: "firefox",
     //   use: { ...devices["Desktop Firefox"] },

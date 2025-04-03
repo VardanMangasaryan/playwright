@@ -11,6 +11,7 @@ test("Sign Up with valid data", async ({
 }) => {
   await loginPage.goToPage();
   await loginPage.signupWithGivenEmailAndPassword(email, name);
+
   await expect(signupPage.name).toHaveValue(name);
   await expect(signupPage.email).toHaveValue(email);
 

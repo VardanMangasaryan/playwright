@@ -13,6 +13,6 @@ test("Element actions", async ({}) => {
   );
   await page.waitForRequest("**/api/data");
   await page.waitForFunction(
-    () => document.querySelector("#cart-count").textContent === "3",
+    () => document.querySelector("#cart-count")?.textContent === "3",
   );
 });

@@ -2,39 +2,32 @@ import { expect } from "@playwright/test";
 import { originalBooking, updatedBooking } from "../testData/bookingTestData";
 import { test } from "./baseTest";
 
-let bookingId: string;
-let token: string;
-
 test.beforeAll(async ({ bookingApi }) => {
-  token = await bookingApi.getAuthToken();
+  process.env.AUTH_TOKEN = await bookingApi.getAuthToken();
 });
 
 test.describe("Booking API", async () => {
-  // Test to create a booking
-  test("Create a new booking", async ({ bookingApi }) => {
-    bookingId = await bookingApi.createBooking(originalBooking);
-    expect(bookingId).toBeDefined();
-  });
-
   // Test to retrieve booking details
   test("Retrieve booking details", async ({ bookingApi }) => {
-    const responseBody = await bookingApi.getBooking(bookingId);
+    const responseBody = await bookingApi.getBooking(process.env.BOOKING_ID);
     expect([responseBody]).toContainEqual(originalBooking);
   });
 
   // Test to update booking details
   test("Update booking details", async ({ bookingApi }) => {
     const responseBody = await bookingApi.updateBooking(
-      bookingId,
-      token,
+      process.env.BOOKING_ID,
+      process.env.AUTH_TOKEN,
       updatedBooking,
     );
     expect([responseBody]).toContainEqual(updatedBooking);
   });
 });
 
-// Test to delete booking
 test.afterAll("Delete booking", async ({ bookingApi }) => {
-  const response = await bookingApi.deleteBooking(bookingId, token);
+  const response = await bookingApi.deleteBooking(
+    process.env.BOOKING_ID,
+    process.env.AUTH_TOKEN,
+  );
   expect(response.ok()).toBeTruthy();
 });

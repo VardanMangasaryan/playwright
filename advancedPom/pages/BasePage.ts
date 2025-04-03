@@ -9,8 +9,8 @@ export class BasePage {
     this.pageUrl = pageUrl;
   }
 
-  async goToPage() {
-    await this.page.goto(this.pageUrl);
+  async goToPage(fullUrl?: string) {
+    await this.page.goto(fullUrl ? `${fullUrl}${this.pageUrl}` : this.pageUrl);
   }
 
   async reloadPage() {
